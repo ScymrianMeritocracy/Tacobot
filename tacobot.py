@@ -11,15 +11,12 @@ def updatecss(rsub, conf):
     # only (de)activate our block on the right day
     dow = getdow(conf["tz"])
     if dow == conf["days"][0]:
-        print "tacoifying"
         oldcss = rsub.get_stylesheet()["stylesheet"]
         todays_css = tacoify(oldcss)
     elif dow == conf["days"][1]:
-        print "detacoifying"
         oldcss = rsub.get_stylesheet()["stylesheet"]
         todays_css = untacoify(tacoify(oldcss))
     else:
-        print "did nothing"
         return
     rsub.set_stylesheet(todays_css)
 
