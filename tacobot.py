@@ -49,7 +49,11 @@ if __name__ == "__main__":
     myconf.close()
 
     # connect to reddit
-    r = praw.Reddit(user_agent=conf["useragent"])
+    if conf["multiprocess"]:
+        myhandler = praw.handlers.MultiprocessHandler()
+    else:
+        myhandler = None
+    r = praw.Reddit(user_agent=conf["useragent"], handler=myhandler)
     r.config.decode_html_entities = True
     r.login(username=conf["username"], password=conf["password"])
 

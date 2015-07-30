@@ -15,6 +15,8 @@ Setup
 
 Copy the example configuration to a file called `tacoconf.yaml` (which is expected to be in the same directory as the bot), and edit at least the stuff in caps to suit your needs. The account used must be a moderator with configuration privileges in the sub(s) given, and the time zone should be a name from the [IANA database](http://www.iana.org/time-zones).
 
+The tacobot optionally supports PRAW's [praw-multiprocess](http://praw.readthedocs.org/en/latest/pages/multiprocess.html) program. Set `multiprocess` to `true` in the configuration to enable this functionality.
+
 Usage
 -----
 
