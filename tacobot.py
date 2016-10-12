@@ -42,20 +42,14 @@ def untacoify(css):
     return css
 
 if __name__ == "__main__":
-    # load configuration options from file beside ourself
+    # load subreddit options from file beside ourself
     mypath = os.path.dirname(os.path.realpath(__file__))
-    myconf = open(mypath + "/tacoconf.yaml", "r")
+    myconf = open(mypath + "/sublist.yaml", "r")
     conf = yaml.safe_load(myconf)
     myconf.close()
 
     # connect to reddit
-    if conf["multiprocess"]:
-        myhandler = praw.handlers.MultiprocessHandler()
-    else:
-        myhandler = None
-    r = praw.Reddit(user_agent=conf["useragent"], handler=myhandler)
-    r.config.decode_html_entities = True
-    r.login(username=conf["username"], password=conf["password"])
+    r = praw.Reddit()
 
     # check and change our list of subreddits
     for sub in conf["subs"]:
