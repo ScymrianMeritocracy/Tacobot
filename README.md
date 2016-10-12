@@ -6,16 +6,14 @@ The tacobot is a simple reddit bot for enabling special weekly CSS styles in a s
 Requirements
 ------------
 
- * [PRAW](https://praw.readthedocs.org/)
+ * [PRAW4](https://praw.readthedocs.io/en/praw4/index.html)
  * [pytz](http://pytz.sourceforge.net/)
  * [PyYAML](http://pyyaml.org/)
 
 Setup
 -----
 
-Copy the example configuration to a file called `tacoconf.yaml` (which is expected to be in the same directory as the bot), and edit at least the stuff in caps to suit your needs. The account used must be a moderator with configuration privileges in the sub(s) given, and the time zone should be a name from the [IANA database](http://www.iana.org/time-zones).
-
-The tacobot optionally supports PRAW's [praw-multiprocess](http://praw.readthedocs.org/en/latest/pages/multiprocess.html) program. Set `multiprocess` to `true` in the configuration to enable this functionality.
+Copy the example configurations to files called `praw.ini` and `sublist.yaml` (which are expected to be in the same directory as the bot), and edit at least the stuff in caps to suit your needs. Note that the `client_id` and `client_secret` values are obtained in your [account preferences](https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example#first-steps). The account used must be a moderator with configuration privileges in the sub(s) given, and the time zone should be a name from the [IANA database](http://www.iana.org/time-zones).
 
 Usage
 -----

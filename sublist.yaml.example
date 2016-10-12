@@ -1,0 +1,11 @@
+%YAML 1.1
+---
+tz: "America/Los_Angeles"
+subs:
+  - "YOURSUBREDDIT"
+days:
+  - "Tuesday" # start day
+  - "Wednesday" # end day
+reasons:
+  - "tacobot in"
+  - "tacobot out"

@@ -6,19 +6,20 @@ import praw
 import pytz
 import yaml
 
-def updatecss(rsub, conf):
+def updatecss(r, sub, conf):
     """Download, edit, and post a stylesheet."""
     # only (de)activate our block on the right day
     dow = getdow(conf["tz"])
     if dow == conf["days"][0]:
-        oldcss = rsub.get_stylesheet()["stylesheet"]
-        todays_css = tacoify(oldcss)
+        page = r.subreddit(sub).wiki["config/stylesheet"]
+        newcss = tacoify(page.content_md)
+        page.edit(newcss, conf["reasons"][0])
     elif dow == conf["days"][1]:
-        oldcss = rsub.get_stylesheet()["stylesheet"]
-        todays_css = untacoify(tacoify(oldcss))
+        page = r.subreddit(sub).wiki["config/stylesheet"]
+        newcss = untacoify(page.content_md)
+        page.edit(newcss, conf["reasons"][1])
     else:
         return
-    rsub.set_stylesheet(todays_css)
 
 def getdow(tz):
     """Determine our dow, based on the given timezone."""
@@ -42,22 +43,15 @@ def untacoify(css):
     return css
 
 if __name__ == "__main__":
-    # load configuration options from file beside ourself
+    # load subreddit options from file beside ourself
     mypath = os.path.dirname(os.path.realpath(__file__))
-    myconf = open(mypath + "/tacoconf.yaml", "r")
+    myconf = open(mypath + "/sublist.yaml", "r")
     conf = yaml.safe_load(myconf)
     myconf.close()
 
     # connect to reddit
-    if conf["multiprocess"]:
-        myhandler = praw.handlers.MultiprocessHandler()
-    else:
-        myhandler = None
-    r = praw.Reddit(user_agent=conf["useragent"], handler=myhandler)
-    r.config.decode_html_entities = True
-    r.login(username=conf["username"], password=conf["password"])
+    r = praw.Reddit()
 
     # check and change our list of subreddits
     for sub in conf["subs"]:
-        rsub = r.get_subreddit(sub)
-        updatecss(rsub, conf)
+        updatecss(r, sub, conf)
