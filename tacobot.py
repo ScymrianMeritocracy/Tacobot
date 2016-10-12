@@ -6,19 +6,19 @@ import praw
 import pytz
 import yaml
 
-def updatecss(rsub, conf):
+def updatecss(r, sub, conf):
     """Download, edit, and post a stylesheet."""
     # only (de)activate our block on the right day
     dow = getdow(conf["tz"])
     if dow == conf["days"][0]:
-        oldcss = rsub.get_stylesheet()["stylesheet"]
-        todays_css = tacoify(oldcss)
+        page = r.subreddit(sub).wiki['config/stylesheet']
+        newcss = tacoify(page.content_md)
     elif dow == conf["days"][1]:
-        oldcss = rsub.get_stylesheet()["stylesheet"]
-        todays_css = untacoify(tacoify(oldcss))
+        page = r.subreddit(sub).wiki['config/stylesheet']
+        newcss = untacoify(page.content_md)
     else:
         return
-    rsub.set_stylesheet(todays_css)
+    page.edit(newcss)
 
 def getdow(tz):
     """Determine our dow, based on the given timezone."""
@@ -53,5 +53,4 @@ if __name__ == "__main__":
 
     # check and change our list of subreddits
     for sub in conf["subs"]:
-        rsub = r.get_subreddit(sub)
-        updatecss(rsub, conf)
+        updatecss(r, sub, conf)
