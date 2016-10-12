@@ -6,3 +6,6 @@ subs:
 days:
   - "Tuesday" # start day
   - "Wednesday" # end day
+reasons:
+  - "tacobot in"
+  - "tacobot out"

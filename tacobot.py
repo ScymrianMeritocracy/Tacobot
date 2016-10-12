@@ -11,14 +11,15 @@ def updatecss(r, sub, conf):
     # only (de)activate our block on the right day
     dow = getdow(conf["tz"])
     if dow == conf["days"][0]:
-        page = r.subreddit(sub).wiki['config/stylesheet']
+        page = r.subreddit(sub).wiki["config/stylesheet"]
         newcss = tacoify(page.content_md)
+        page.edit(newcss, conf["reasons"][0])
     elif dow == conf["days"][1]:
-        page = r.subreddit(sub).wiki['config/stylesheet']
+        page = r.subreddit(sub).wiki["config/stylesheet"]
         newcss = untacoify(page.content_md)
+        page.edit(newcss, conf["reasons"][1])
     else:
         return
-    page.edit(newcss)
 
 def getdow(tz):
     """Determine our dow, based on the given timezone."""
