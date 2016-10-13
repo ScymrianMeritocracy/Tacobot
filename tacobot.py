@@ -16,7 +16,7 @@ def updatecss(r, sub, conf):
         page.edit(newcss, conf["reasons"][0])
     elif dow == conf["days"][1]:
         page = r.subreddit(sub).wiki["config/stylesheet"]
-        newcss = untacoify(page.content_md)
+        newcss = untacoify(tacoify(page.content_md))
         page.edit(newcss, conf["reasons"][1])
     else:
         return
