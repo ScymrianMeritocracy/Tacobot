@@ -6,9 +6,9 @@ The tacobot is a simple reddit bot for enabling special weekly CSS styles in a s
 Requirements
 ------------
 
- * [PRAW4](https://praw.readthedocs.io/en/praw4/index.html)
+ * [PRAW 4.0.0+](https://praw.readthedocs.io/en/latest/index.html)
  * [pytz](http://pytz.sourceforge.net/)
- * [PyYAML](http://pyyaml.org/)
+ * [ruamel.yaml](https://yaml.readthedocs.io/en/latest/index.html)
 
 Setup
 -----
