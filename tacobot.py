@@ -4,7 +4,7 @@ import datetime
 import os
 import praw
 import pytz
-import yaml
+import ruamel.yaml
 
 def updatecss(r, sub, conf):
     """Download, edit, and post a stylesheet."""
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     # load subreddit options from file beside ourself
     mypath = os.path.dirname(os.path.realpath(__file__))
     myconf = open(mypath + "/sublist.yaml", "r")
-    conf = yaml.safe_load(myconf)
+    conf = ruamel.yaml.safe_load(myconf)
     myconf.close()
 
     # connect to reddit
